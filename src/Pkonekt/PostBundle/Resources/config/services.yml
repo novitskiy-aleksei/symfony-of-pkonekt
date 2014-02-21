@@ -1,0 +1,7 @@
+parameters:
+#    pkonekt_post.example.class: Pkonekt\PostBundle\Example
+
+services:
+#    pkonekt_post.example:
+#        class: %pkonekt_post.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

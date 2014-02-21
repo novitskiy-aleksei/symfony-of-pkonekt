@@ -1,0 +1,3 @@
+pkonekt_index_homepage:
+    pattern:  /
+    defaults: { _controller: PkonektIndexBundle:Default:index }

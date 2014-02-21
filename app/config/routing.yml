@@ -1,3 +1,11 @@
+pkonekt_index:
+    resource: "@PkonektIndexBundle/Resources/config/routing.yml"
+    prefix:   /
+
+pkonekt_post:
+    resource: "@PkonektPostBundle/Resources/config/routing.yml"
+    prefix:   /
+
 pkonekt_user:
     resource: "@PkonektUserBundle/Resources/config/routing.yml"
     prefix:   /
