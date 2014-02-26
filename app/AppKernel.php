@@ -21,6 +21,7 @@ class AppKernel extends Kernel
             new Pkonekt\UserBundle\PkonektUserBundle(),
             new Pkonekt\PostBundle\PkonektPostBundle(),
             new Pkonekt\IndexBundle\PkonektIndexBundle(),
+            new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
