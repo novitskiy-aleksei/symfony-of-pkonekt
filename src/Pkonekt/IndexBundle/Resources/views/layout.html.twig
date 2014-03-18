@@ -1,37 +1,59 @@
-{% extends "TwigBundle::layout.html.twig" %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset={{ _charset }}"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-{% block head %}
-    <link rel="icon" sizes="16x16" href="{{ asset('favicon.ico') }}" />
-    <link rel="stylesheet" href="{{ asset('bundles/acmedemo/css/demo.css') }}" />
-{% endblock %}
+    <title>{% block title %}{% endblock %}</title>
 
-{% block title 'Demo Bundle' %}
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.4.2/pure-min.css">
 
-{% block body %}
-    {% for flashMessage in app.session.flashbag.get('notice') %}
-        <div class="flash-message">
-            <em>Notice</em>: {{ flashMessage }}
+    <link href="{{ asset('bundles/pkonektindex/css/layouts/main-grid.css') }}" rel="stylesheet" type="text/css" media="all" />
+    <link href="{{ asset('bundles/pkonektindex/css/layouts/marketing.css') }}" rel="stylesheet" type="text/css" media="all" />
+
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+
+    {% block head %}{% endblock %}
+</head>
+
+<body>
+
+    <div class="header">
+        <div class="home-menu pure-menu pure-menu-open pure-menu-horizontal pure-menu-fixed">
+            <a class="pure-menu-heading" href="">PKONEKT</a>
+
+            <ul>
+                {% if is_granted('ROLE_USER') %}
+                    <li class="pure-menu-selected">{{ app.user.username }}</li>
+                    <li>
+                        <a href="{{ path('fos_user_security_logout') }}">{{ 'Logout' }}</a>
+                    </li>
+                {% else %}
+                    <li><a href="{{ path('fos_user_registration_register') }}">{{ 'Register' }}</a></li>
+                    <li><a href="{{ path('fos_user_security_login') }}">{{ 'Login' }}</a></li>
+                {% endif %}
+            </ul>
         </div>
-    {% endfor %}
-
-    {% block content_header %}
-        <ul id="menu">
-            {% block content_header_more %}
-                <li><a href="{{ path('_demo') }}">Demo Home</a></li>
-            {% endblock %}
-        </ul>
-
-        <div style="clear: both"></div>
-    {% endblock %}
-
-    <div class="block">
-        {% block content %}{% endblock %}
     </div>
 
-    {% if code is defined %}
-        <h2>Code behind this page</h2>
-        <div class="block">
-            <div class="symfony-content">{{ code|raw }}</div>
+    <div class="content-wrapper">
+        <div class="content">
+            {% block content %}{% endblock %}
         </div>
-    {% endif %}
-{% endblock %}
+    </div>
+
+    <script src="http://yui.yahooapis.com/3.14.1/build/yui/yui.js"></script>
+    <script>
+        YUI().use('node-base', 'node-event-delegate', function (Y) {
+            // This just makes sure that the href="#" attached to the <a> elements
+            // don't scroll you back up the page.
+            Y.one('body').delegate('click', function (e) {
+                e.preventDefault();
+            }, 'a[href="#"]');
+        });
+    </script>
+
+    <br style="clear: both"/>
+
+</body>
+</html>

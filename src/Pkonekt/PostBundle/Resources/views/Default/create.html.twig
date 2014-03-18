@@ -1,0 +1,28 @@
+{% extends "PkonektIndexBundle::layout.html.twig" %}
+
+{% block title "Symfony - Demos" %}
+
+    {% block content_header '' %}
+
+        {% block content %}
+
+            {{ form_start(form, { 'attr': {'class': 'pure-form pure-form-aligned'} }) }}
+                {{ form_errors(form) }}
+                <fieldset>
+                    <div class="pure-control-group">
+                        {{ form_row(form.content) }}
+                    </div>
+
+                    <div class="pure-control-group">
+                        {{ form_row(form.attaches) }}
+                    </div>
+
+                    <div class="pure-controls">
+                        <button type="submit" class="pure-button pure-button-primary">Submit</button>
+                    </div>
+                </fieldset>
+            {{ form_end(form) }}
+
+
+
+        {% endblock %}

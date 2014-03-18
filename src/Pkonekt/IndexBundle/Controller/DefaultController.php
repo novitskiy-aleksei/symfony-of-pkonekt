@@ -8,6 +8,11 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('PkonektIndexBundle:Default:index.html.twig', array('name' => ''));
+        $posts = $this->get('doctrine_mongodb')
+            ->getManager()
+            ->getRepository('PkonektPostBundle:Post')
+            ->findForUser();
+
+        return $this->render('PkonektIndexBundle:Default:index.html.twig', array('posts' => $posts));
     }
 }

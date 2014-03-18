@@ -19,6 +19,7 @@ if (isset($_SERVER['HTTP_CLIENT_IP'])
 
 $loader = require_once __DIR__.'/../app/bootstrap.php.cache';
 Debug::enable();
+function dd($q){var_dump($q);die();}
 
 require_once __DIR__.'/../app/AppKernel.php';
 

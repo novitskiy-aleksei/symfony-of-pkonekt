@@ -4,7 +4,6 @@ namespace Pkonekt\UserBundle\Document;
 
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
-use Doctrine\ODM\MongoDB\Mapping\Annotations\ReferenceMany;
 use Pkonekt\PostBundle\Document\Post;
 
 /**

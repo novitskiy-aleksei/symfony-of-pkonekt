@@ -4,7 +4,7 @@ imports:
 
 framework:
     #esi:             ~
-    #translator:      { fallback: "%locale%" }
+    translator:      { fallback: "%locale%" }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -82,3 +82,9 @@ fos_user:
     db_driver: mongodb
     firewall_name: main
     user_class: Pkonekt\UserBundle\Document\User
+
+services:
+    twig.extension.intl:
+        class: Twig_Extensions_Extension_Intl
+        tags:
+                - { name: twig.extension }

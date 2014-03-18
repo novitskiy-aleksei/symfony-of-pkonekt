@@ -1,3 +1,3 @@
-pkonekt_post_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: PkonektPostBundle:Default:index }
+pkonekt_post_create:
+    pattern:  /post/create
+    defaults: { _controller: PkonektPostBundle:Default:create }
