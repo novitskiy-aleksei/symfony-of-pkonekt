@@ -1,5 +1,4 @@
-PKONEKT rewrited with symfony2
-========================
+### PKONEKT rewrited with symfony2
 
  * [Old pkonekt][1]
  * [New pkonekt][2]
