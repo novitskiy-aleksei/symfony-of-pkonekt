@@ -20,11 +20,14 @@
 
     <div class="header">
         <div class="home-menu pure-menu pure-menu-open pure-menu-horizontal pure-menu-fixed">
-            <a class="pure-menu-heading" href="">PKONEKT</a>
+            <a class="pure-menu-heading" href="{{ path('pkonekt_index_homepage') }}">PKONEKT</a>
+            {% if is_granted('ROLE_USER') %}
+                {{ app.user.username }}
+            {% endif %}
 
             <ul>
                 {% if is_granted('ROLE_USER') %}
-                    <li class="pure-menu-selected">{{ app.user.username }}</li>
+                    <li><button class="button-secondary pure-button" href="{{ path('pkonekt_post_create') }}">{{ 'Post!' }}</button></li>
                     <li>
                         <a href="{{ path('fos_user_security_logout') }}">{{ 'Logout' }}</a>
                     </li>
@@ -42,14 +45,14 @@
         </div>
     </div>
 
-    <script src="http://yui.yahooapis.com/3.14.1/build/yui/yui.js"></script>
+    <script src="http://underscorejs.org/underscore-min.js"></script>
     <script>
-        YUI().use('node-base', 'node-event-delegate', function (Y) {
-            // This just makes sure that the href="#" attached to the <a> elements
-            // don't scroll you back up the page.
-            Y.one('body').delegate('click', function (e) {
-                e.preventDefault();
-            }, 'a[href="#"]');
+        _.map(document.getElementsByTagName('button'), function(num){
+            if (!_.isUndefined(num)){
+                num.addEventListener('click', function(){
+                    document.location.href = this.getAttribute("href");
+                });
+            }
         });
     </script>
 
