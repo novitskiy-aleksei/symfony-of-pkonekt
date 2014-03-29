@@ -4,19 +4,29 @@ namespace Pkonekt\PostBundle\Controller;
 
 use Pkonekt\PostBundle\Document\Post;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
-    public function createAction()
+    public function createAction(Request $request)
     {
-        // create a task and give it some dummy data for this example
         $post = new Post();
-
 
         $form = $this->createFormBuilder($post)
             ->add('content', 'textarea')
-            ->add('attaches', 'text')
+            ->add('attach', 'text')
+            ->add('isRich', 'hidden')
             ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $post->setUser($this->getUser());
+            $this->get('doctrine_mongodb')->getManager()->persist($post);
+            $this->get('doctrine_mongodb')->getManager()->flush();
+
+            return $this->redirect('/');
+        }
 
         return $this->render('PkonektPostBundle:Default:create.html.twig', array(
             'form' => $form->createView(),

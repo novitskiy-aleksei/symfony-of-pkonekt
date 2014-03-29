@@ -4,12 +4,11 @@ namespace Pkonekt\PostBundle\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 use Pkonekt\PostBundle\Document\Attach;
-use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 use Doctrine\ORM\Mapping\Column;
 
 /**
  * @ODM\Document
- * @MongoDB\Document(repositoryClass="Pkonekt\PostBundle\Repository\PostRepository")
+ * @ODM\Document(repositoryClass="Pkonekt\PostBundle\Repository\PostRepository")
  */
 class Post
 {
@@ -21,13 +20,13 @@ class Post
     /** @ODM\String */
     private $content;
 
-    /** @ODM\EmbedMany(targetDocument="Comment") */
+    /** @ODM\ReferenceMany(targetDocument="Comment") */
     private $comments = array();
 
-    /** @ODM\EmbedMany(targetDocument="Attach") */
-    private $attaches;
+    /** @ODM\String */
+    private $attach;
 
-    /** @ODM\EmbedOne(targetDocument="Pkonekt\UserBundle\Document\User") */
+    /** @ODM\ReferenceOne(targetDocument="Pkonekt\UserBundle\Document\User") */
     private $user;
 
     /**
@@ -40,25 +39,13 @@ class Post
      */
     private $updated;
 
+    /** @ODM\Boolean */
+    private $isRich = 0;
+
     public function __construct()
     {
         // constructor is never called by Doctrine
         $this->created = $this->updated = new \DateTime("now");
-    }
-
-    /**
-     * @param Attach $attach
-     */
-    public function addAttaches(Attach $attach){
-        $this->attaches[] = $attach;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getAttaches()
-    {
-        return $this->attaches;
     }
 
     /**
@@ -75,6 +62,38 @@ class Post
     public function addComment(Comment $comment)
     {
         $this->comments[] = $comment;
+    }
+
+    /**
+     * @param mixed $attach
+     */
+    public function setAttach($attach)
+    {
+        $this->attach = $attach;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAttach()
+    {
+        return $this->attach;
+    }
+
+    /**
+     * @param mixed $isRich
+     */
+    public function setIsRich($isRich)
+    {
+        $this->isRich = $isRich;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIsRich()
+    {
+        return $this->isRich;
     }
 
     /**

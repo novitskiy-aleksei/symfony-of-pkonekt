@@ -15,12 +15,17 @@
                 <div class="post">
                     {{ post.id }}
                     <div class="datetime">{{ post.created }}</div>
-                    <div class="author"></div>
+                    <div class="author">{{ post.user.username }}</div>
                     <div class="content">
                         <div class="text">{{ post.content }}</div>
                         <div class="attaches"></div>
                     </div>
-                    <div class="comments"></div>
+                    <div class="comments">
+                        {% for comment in post.comments %}
+                            {#<div class="author">{{ comment.user.username }}</div>#}
+                            <div class="content">{{ comment.content }}</div>
+                        {% endfor %}
+                    </div>
                 </div>
             {% endfor %}
         </div>

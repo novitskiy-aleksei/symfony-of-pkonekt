@@ -1,3 +1,8 @@
 pkonekt_post_create:
     pattern:  /post/create
     defaults: { _controller: PkonektPostBundle:Default:create }
+
+pkonekt_post_create_submit:
+    pattern:  /post/create_submit
+    defaults: { _controller: PkonektPostBundle:Default:createSubmit }
+    methods:  [POST]
