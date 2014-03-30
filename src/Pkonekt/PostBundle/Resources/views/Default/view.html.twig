@@ -1,0 +1,44 @@
+{% extends "PkonektIndexBundle::layout.html.twig" %}
+
+{% block title "Symfony - Demos" %}
+
+{% block content_header '' %}
+
+{% block content %}
+
+    <link href="{{ asset('bundles/pkonektpost/css/posts.css') }}" rel="stylesheet" type="text/css" media="all" />
+
+
+    <h2 class="content-head is-center"></h2>
+
+    <div class="posts">
+        <div class="post">
+            {{ post.id }}
+            <div class="datetime">{{ post.created.format('Y-m-d H:i:s') }}</div>
+            <div class="author">Posted by:
+                <a class="pure-menu-heading" href="{{ path('pkonekt_user_view', {'id': post.user.id}) }}">{{ post.user.username }}</a>
+            </div>
+            <div class="content">
+                <div class="text">{{ post.content }}</div>
+                <div class="attaches"></div>
+                <div class="rating">
+                    <div class="likes">
+                        <div class="count">{{ post.likes }}</div>
+                        <div class="like"><a href="#">like!</a></div>
+                    </div>
+                    <div class="dislikes">
+                        <div class="count">{{ post.dislikes }}</div>
+                        <div class="dislike"><a href="#">shit!</a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="comments">
+                {% for comment in post.comments %}
+                    <div class="author">{{ comment.user.username }}</div>
+                    <div class="content">{{ comment.content }}</div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

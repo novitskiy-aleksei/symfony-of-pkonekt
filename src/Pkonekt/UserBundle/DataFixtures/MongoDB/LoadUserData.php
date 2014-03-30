@@ -25,8 +25,11 @@ class LoadUserData implements FixtureInterface
         $manager->persist($userAdmin);
         $manager->flush();
 
+        /*
         $postWithComment = new Post();
         $postWithComment->setContent("Im post without any attach, but i have a comment! ");
+        $postWithComment->setCreated(new \DateTime("now"));
+        $postWithComment->setUpdated(new \DateTime("now"));
         $comment = new Comment();
         $comment->setTitle('im comment title');
         $comment->setContent('im comment cocontent');
@@ -36,6 +39,8 @@ class LoadUserData implements FixtureInterface
 
         $postWithoutAttach = new Post();
         $postWithoutAttach->setContent("Im post without any attach :( ");
+        $postWithoutAttach->setCreated(new \DateTime("now"));
+        $postWithoutAttach->setUpdated(new \DateTime("now"));
         $userAdmin->addPost($postWithoutAttach);
         $postWithoutAttach->setUser($userAdmin);
         $manager->persist($postWithoutAttach);
@@ -46,6 +51,6 @@ class LoadUserData implements FixtureInterface
         $manager->persist($postWithComment);
 
 
-        $manager->flush();
+        $manager->flush();*/
     }
 }

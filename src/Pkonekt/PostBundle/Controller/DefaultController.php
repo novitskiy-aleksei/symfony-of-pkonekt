@@ -32,4 +32,14 @@ class DefaultController extends Controller
             'form' => $form->createView(),
         ));
     }
+
+    public function viewAction($id)
+    {
+        $post = $this->get('doctrine_mongodb')
+            ->getManager()
+            ->getRepository('PkonektPostBundle:Post')
+            ->find($id);
+
+        return $this->render('PkonektPostBundle:Default:view.html.twig', ['post' => $post]);
+    }
 }

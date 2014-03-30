@@ -1,1 +1,16 @@
-Hello {{ name }}!
+{% extends "PkonektIndexBundle::layout.html.twig" %}
+
+{% block title "Symfony - Demos" %}
+
+{% block content_header '' %}
+
+{% block content %}
+
+    <div class="user">
+        <div class="name">Name: {{ user.username }}</div>
+        {#<div class="mail">Mail: {{ user.email }}</div>#}
+        <div class="post-count">Post count: {{ user.posts.count }}</div>
+        <div class="last-login">Last login: {{ user.lastLogin.format('Y-m-d H:i:s') }}</div>
+    </div>
+
+{% endblock %}

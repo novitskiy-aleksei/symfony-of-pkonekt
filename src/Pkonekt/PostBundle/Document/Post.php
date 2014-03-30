@@ -3,8 +3,7 @@
 namespace Pkonekt\PostBundle\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
-use Pkonekt\PostBundle\Document\Attach;
-use Doctrine\ORM\Mapping\Column;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ODM\Document
@@ -21,7 +20,7 @@ class Post
     private $content;
 
     /** @ODM\ReferenceMany(targetDocument="Comment") */
-    private $comments = array();
+    private $comments = [];
 
     /** @ODM\String */
     private $attach;
@@ -30,23 +29,27 @@ class Post
     private $user;
 
     /**
-     * @Column(type="\DateTime")
+     * @var \DateTime $created
+     *
+     * @Gedmo\Timestampable(on="create")
+     * @ODM\Date
      */
     private $created;
 
     /**
-     * @Column(type="\DateTime")
+     * @Gedmo\Timestampable(on="update")
+     * @ODM\Date
      */
     private $updated;
 
     /** @ODM\Boolean */
     private $isRich = 0;
 
-    public function __construct()
-    {
-        // constructor is never called by Doctrine
-        $this->created = $this->updated = new \DateTime("now");
-    }
+    /** @ODM\ReferenceMany(targetDocument="Pkonekt\UserBundle\Document\User") */
+    private $likes = [];
+
+    /** @ODM\ReferenceMany(targetDocument="Pkonekt\UserBundle\Document\User") */
+    private $dislikes = [];
 
     /**
      * @param mixed $comments
@@ -182,5 +185,53 @@ class Post
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * @param mixed $dislikes
+     */
+    public function setDislikes($dislikes)
+    {
+        $this->dislikes = $dislikes;
+    }
+
+    /**
+     * @param mixed $dislikes
+     */
+    public function addDislikes($dislikes)
+    {
+        $this->dislikes[] = $dislikes;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDislikes()
+    {
+        return $this->dislikes;
+    }
+
+    /**
+     * @param mixed $likes
+     */
+    public function setLikes($likes)
+    {
+        $this->likes = $likes;
+    }
+
+    /**
+     * @param mixed $likes
+     */
+    public function addLikes($likes)
+    {
+        $this->likes[] = $likes;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLikes()
+    {
+        return $this->likes;
     }
 }

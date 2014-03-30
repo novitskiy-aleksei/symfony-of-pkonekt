@@ -2,7 +2,16 @@ pkonekt_post_create:
     pattern:  /post/create
     defaults: { _controller: PkonektPostBundle:Default:create }
 
-pkonekt_post_create_submit:
-    pattern:  /post/create_submit
-    defaults: { _controller: PkonektPostBundle:Default:createSubmit }
-    methods:  [POST]
+pkonekt_post_view:
+    pattern:  /post/view/{id}
+    defaults: { _controller: PkonektPostBundle:Default:view }
+
+pkonekt_post_like:
+    pattern:  /post/like/{postId}
+    defaults: { _controller: PkonektPostBundle:Social:likePost }
+    methods: [GET]
+
+pkonekt_post_dislike:
+    pattern:  /post/dislike/{postId}
+    defaults: { _controller: PkonektPostBundle:Socialt:dislikePost }
+    methods: [POST]
