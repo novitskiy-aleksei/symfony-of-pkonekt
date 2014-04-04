@@ -9,7 +9,7 @@ pkonekt_post_view:
 pkonekt_post_like:
     pattern:  /post/like/{postId}
     defaults: { _controller: PkonektPostBundle:Social:likePost }
-    methods: [GET]
+    methods: [POST]
 
 pkonekt_post_dislike:
     pattern:  /post/dislike/{postId}

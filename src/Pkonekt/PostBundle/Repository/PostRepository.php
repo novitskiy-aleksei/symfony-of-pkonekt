@@ -34,7 +34,9 @@ class PostRepository extends DocumentRepository
                 ->execute();
         }
 
-        return $probablyLiked;
+        $post = $this->find($post->getId());
+
+        return $post->getLikes()->count();
     }
 
 } 
